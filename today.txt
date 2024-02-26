@@ -1,0 +1,18 @@
+import datetime
+
+current_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+with open("today.txt", "w") as file:
+    file.write(current_datetime)
+
+try:
+    with open("today.txt", "r") as file:
+        today_string = file.read()
+except FileNotFoundError:
+    print("File not found.")
+    exit()
+
+try:
+    parsed_datetime = datetime.datetime.strptime(today_string.strip(), "%Y-%m-%d %H:%M:%S")
+    print(parsed_datetime)
+except ValueError:
+    print("Error parsing date from the file.")
